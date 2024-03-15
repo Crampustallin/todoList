@@ -9,12 +9,21 @@ templ Page() {
 		<script src="/assets/htmx.min.js"></script>
 		</head>
 		<body>
-		<button hx-post="/clicked"
-		hx-trigger="click"
-		hx-target="#handleResponse"
-		>Click</button>
-		<div id="handleResponse"></div>
+		@form()
+		<ul id="handleResponse"></ul>
 
 		</body>
 	</html>
+}
+
+templ form() {
+	<form hx-post="/clicked"
+		hx-target="#handleResponse"
+		>
+		<div>
+		<label>TODO</label>
+		<input type="text" name="todoDis" value="" />
+		<button type="submit">Add</button>
+		</div>
+		</form>
 }
