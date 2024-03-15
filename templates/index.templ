@@ -1,6 +1,8 @@
 package templates
 
-templ Page() {
+import "github.com/Crampustallin/todoList/models"
+
+templ Page(todos []models.Todo) {
 	<html lang="en">
 		<head>
 		<meta charset="UTF-8" />
@@ -10,7 +12,9 @@ templ Page() {
 		</head>
 		<body>
 		@form()
-		<ul id="handleResponse"></ul>
+		<ul id="handleResponse">
+		@Response(todos)
+		</ul>
 
 		</body>
 	</html>

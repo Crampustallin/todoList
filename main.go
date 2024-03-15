@@ -1,25 +1,65 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
+	"log"
 	"net/http"
+	"os"
 
+	"github.com/Crampustallin/todoList/models"
 	"github.com/Crampustallin/todoList/templates"
-	"github.com/a-h/templ"
+	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 )
+
+var todos []models.Todo
 
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	connectionString := os.Getenv("DB_CONNECTION_STRING")
+	db, err := sql.Open("postgres", connectionString)
+	if err != nil {
+		log.Fatal("Failed to connect to database", err)
+	}
+	defer db.Close()
+
+	if err := db.Ping(); err != nil {
+		log.Fatal("Error pinging database", err)
+	} else {
+		fmt.Println("Connected to postgresql database")
+	}
+
 	fs := http.FileServer(http.Dir("assets"))
 	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
-	mainPage := templates.Page()
-	http.Handle("/", templ.Handler(mainPage))
+	todos, err = getTodo(db)
+	if err != nil {
+		log.Fatal("Error getting todos:", err)
+	}
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodGet {
+			mainPage := templates.Page(todos)
+			mainPage.Render(r.Context(), w)
+		}
+	})
 
 	http.HandleFunc("/clicked", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodPost {
-			postHandler(w,r)
+			postHandler(w, r, db)
 			return
+		}
+		if r.Method == http.MethodPut {
+			return // TODO: create update handler
+		}
+		if r.Method == http.MethodDelete {
+			return // TODO: create delete handler 
 		}
 		return
 	})

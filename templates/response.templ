@@ -1,7 +1,11 @@
 package templates
 
+import "github.com/Crampustallin/todoList/models"
 
-
-templ Response(text string) {
-	<li>{text}</li>
+templ Response(text []models.Todo) {
+for _, txt := range text {
+	<li>{txt.Description}</li>
+		<button hx-delete="/clicked">X</button>
+		<button hx-put="/clicked">edit</button>
+	}
 }
