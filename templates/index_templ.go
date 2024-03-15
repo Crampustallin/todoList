@@ -12,7 +12,7 @@ import "bytes"
 
 import "github.com/Crampustallin/todoList/models"
 
-func Page(todos []models.Todo) templ.Component {
+func Page(todos map[int]models.Todo) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -65,7 +65,7 @@ func form() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form hx-post=\"/clicked\" hx-target=\"#handleResponse\"><div><label>TODO</label> <input type=\"text\" name=\"todoDis\" value=\"\"> <button type=\"submit\">Add</button></div></form>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form hx-post=\"/clicked/\" hx-target=\"#handleResponse\"><div><label>TODO</label> <input type=\"text\" name=\"todoDis\" value=\"\"> <label>Status</label> <input type=\"text\" name=\"status\" value=\"\"> <button type=\"submit\">Add</button></div></form>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

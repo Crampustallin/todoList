@@ -13,7 +13,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-var todos []models.Todo
+var todos map[int]models.Todo
 
 
 func main() {
@@ -50,18 +50,23 @@ func main() {
 		}
 	})
 
-	http.HandleFunc("/clicked", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/clicked/", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodPost {
 			postHandler(w, r, db)
 			return
 		}
 		if r.Method == http.MethodPut {
+			putHandler(w,r, db)
 			return // TODO: create update handler
 		}
 		if r.Method == http.MethodDelete {
+			delHandler(w,r, db)
 			return // TODO: create delete handler 
 		}
 		return
+	})
+
+	http.HandleFunc("/clicked/id", func(w http.ResponseWriter, r *http.Request){
 	})
 
 	fmt.Println("Listening to :3000")

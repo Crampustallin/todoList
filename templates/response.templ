@@ -1,11 +1,14 @@
 package templates
 
 import "github.com/Crampustallin/todoList/models"
+import "strconv"
 
-templ Response(text []models.Todo) {
+templ Response(text map[int]models.Todo) {
 for _, txt := range text {
-	<li>{txt.Description}</li>
-		<button hx-delete="/clicked">X</button>
-		<button hx-put="/clicked">edit</button>
+	<li>{txt.Description}:{txt.Status}
+		<button hx-delete={"/clicked/?id="+strconv.Itoa(txt.ID)}
+		hx-target="#handleResponse">X</button>
+		<button hx-put={"/clicked/?id="+strconv.Itoa(txt.ID)}>edit</button>
+	</li>
 	}
 }

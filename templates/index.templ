@@ -2,7 +2,7 @@ package templates
 
 import "github.com/Crampustallin/todoList/models"
 
-templ Page(todos []models.Todo) {
+templ Page(todos map[int]models.Todo) {
 	<html lang="en">
 		<head>
 		<meta charset="UTF-8" />
@@ -21,12 +21,14 @@ templ Page(todos []models.Todo) {
 }
 
 templ form() {
-	<form hx-post="/clicked"
+	<form hx-post="/clicked/"
 		hx-target="#handleResponse"
 		>
 		<div>
 		<label>TODO</label>
 		<input type="text" name="todoDis" value="" />
+		<label>Status</label>
+		<input type="text" name="status" value="" />
 		<button type="submit">Add</button>
 		</div>
 		</form>
