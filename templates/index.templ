@@ -1,0 +1,20 @@
+package templates
+
+templ Page() {
+	<html lang="en">
+		<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>TODO</title>
+		<script src="/assets/htmx.min.js"></script>
+		</head>
+		<body>
+		<button hx-post="/clicked"
+		hx-trigger="click"
+		hx-target="#handleResponse"
+		>Click</button>
+		<div id="handleResponse"></div>
+
+		</body>
+	</html>
+}
