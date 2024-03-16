@@ -5,10 +5,10 @@ import "strconv"
 
 templ Response(text map[int]models.Todo) {
 for _, txt := range text {
-	<li>{txt.Description}:{txt.Status}
+	<li class="dark:bg-gray-900 dark:text-white py-2.5 px-5">{txt.Description}:{txt.Status}
 		<button hx-delete={"/clicked/?id="+strconv.Itoa(txt.ID)}
-		hx-target="#handleResponse">X</button>
-		<button hx-put={"/clicked/?id="+strconv.Itoa(txt.ID)}>edit</button>
+	hx-target="#handleResponse" class="bg-red-500 hover:bg-red-600 darl:hover:bg-red-600 dark:bg-red-500 text-white font-bold text-center py-2.5 px-5">X</button>
+		<button hx-put={"/clicked/?id="+strconv.Itoa(txt.ID)} class="bg-green-500 dark:bg-green-500 hover:bg-green-600 dark:hover:bg-green-600 text-center py-2.5 px-5">edit</button>
 	</li>
 	}
 }
