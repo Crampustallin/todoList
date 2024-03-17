@@ -27,8 +27,35 @@ func postHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	}
 }
 
+func editHandler(w http.ResponseWriter, r *http.Request) {
+	params := r.URL.Query().Get("id")
+	id, err := strconv.Atoi(params)
+	if err != nil {
+		http.Error(w, "Invalid id", http.StatusBadRequest)
+		return
+	}
+	todo := todos[id]
+	templates.Edit(todo).Render(r.Context(), w)
+}
+
 func putHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
-//	params := r.URL.Query().Get("id")
+	params := r.URL.Query().Get("id")
+	id, err := strconv.Atoi(params)
+	if err != nil {
+		http.Error(w, "Invalid id", http.StatusBadRequest)
+		return
+	}
+	err = r.ParseForm()
+	if err != nil {
+		http.Error(w, "Failed to parse from data", http.StatusBadRequest)
+		return
+	}
+	if r.Form.Has("todoDis") && r.Form.Has("todoStatus") {
+		task := r.Form.Get("todoDis")
+		status := r.Form.Get("todoStatus")
+		changeTodo(db, task, status, id)
+	}
+	templates.Response(todos).Render(r.Context(), w)
 }
 
 func delHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
@@ -54,6 +81,15 @@ func saveTodo(db *sql.DB, task, status string) error {
 		return fmt.Errorf("error inserting todo: %w", err)
 	}
 	todos[int(id)] = models.Todo{ID: int(id),  Description: task, Status: status}
+	return nil
+}
+
+func changeTodo(db *sql.DB, task, status string, id int) error {
+	_, err := db.Exec("UPDATE todo_list SET description=$1, status=$2 WHERE task_id=$3", task, status, id)
+	if err != nil {
+		return fmt.Errorf("error updating todolist: %w", err)
+	}
+	todos[id] = models.Todo{Description: task, Status: status}
 	return nil
 }
 

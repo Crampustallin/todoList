@@ -51,22 +51,30 @@ func main() {
 	})
 
 	http.HandleFunc("/clicked/", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodGet {
+			templates.Response(todos).Render(r.Context(), w)
+			return
+		}
 		if r.Method == http.MethodPost {
 			postHandler(w, r, db)
 			return
 		}
 		if r.Method == http.MethodPut {
 			putHandler(w,r, db)
-			return // TODO: create update handler
+			return
 		}
 		if r.Method == http.MethodDelete {
 			delHandler(w,r, db)
-			return // TODO: create delete handler 
+			return 	
 		}
 		return
 	})
 
-	http.HandleFunc("/clicked/id", func(w http.ResponseWriter, r *http.Request){
+	http.HandleFunc("/clicked/edit/", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodGet {
+			editHandler(w,r)
+			return
+		}
 	})
 
 	fmt.Println("Listening to :3000")
