@@ -25,7 +25,7 @@ func Page(todos map[int]models.Todo) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>TODO</title><script src=\"/assets/htmx.min.js\"></script><link href=\"/assets/styles/output.css\" rel=\"stylesheet\"></head><body class=\"dark:bg-gray-700\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>TODO</title><script src=\"/assets/htmx.min.js\"></script><link href=\"/assets/styles/output.css\" rel=\"stylesheet\"></head><body class=\"dark:bg-gray-700\"><div class=\"grid justify-center items-center h-full\"><div class=\"w-96\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -41,7 +41,7 @@ func Page(todos map[int]models.Todo) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</ul></body></html>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</ul></div></div></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -65,7 +65,7 @@ func form() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form hx-post=\"/clicked/\" hx-target=\"#handleResponse\"><div class=\"grid gap-6 mb-6 md:grid-cols-2\"><label for=\"todoDis\" class=\"block mb-2 text-sm font-medium text-gray-900 dark:text-white\">TODO</label> <input type=\"text\" name=\"todoDis\" value=\"\" id=\"todoDis\" class=\"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-600 focus:border-sky-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-600 dark:text-white dark:focus:ring-sky-900 dark:focus:border-sky-900\"> <label for=\"status\" class=\"block mb-2 text-sm font-medium text-gray-900 dark:text-white\">Status</label> <input id=\"status\" type=\"text\" name=\"status\" value=\"\" class=\"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-600 focus:border-sky-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-600 dark:text-white dark:focus:ring-sky-900 dark:focus:border-sky-900\"> <button type=\"submit\" class=\"text-white bg-blue-300 hover:bg-blue-600 dark:text-white dark:bg-blue-300 dark:hover:bg-blue-400 px-5 py-2.5 text-center dark:focus:ring-blue-800\">Add</button></div></form>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form hx-post=\"/clicked/\" hx-target=\"#handleResponse\"><div class=\"grid gap-6 mb-6 md:grid-cols-1\"><label for=\"todoDis\" class=\"block mb-2 text-sm font-medium text-gray-900 dark:text-white\">TODO</label> <input type=\"text\" name=\"todoDis\" value=\"\" id=\"todoDis\" class=\"block p-2.5 w-full\"> <label for=\"status\" class=\"block mb-2 text-sm font-medium text-gray-900 dark:text-white\">Status</label> <input id=\"status\" type=\"text\" name=\"status\" value=\"\" class=\"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-600 focus:border-sky-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-600 dark:text-white dark:focus:ring-sky-900 dark:focus:border-sky-900\"> <button type=\"submit\" class=\"text-white bg-blue-600 hover:bg-blue-700 dark:text-white dark:bg-blue-600 dark:hover:bg-blue-700 px-5 py-2.5 text-center dark:focus:ring-blue-800\">Add</button></div></form>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

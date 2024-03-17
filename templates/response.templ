@@ -5,25 +5,27 @@ import "strconv"
 
 templ Response(text map[int]models.Todo) {
 for _, txt := range text {
-	<li class="dark:bg-gray-900 dark:text-white py-2.5 px-5">{txt.Description}:{txt.Status}
+	<li class="dark:bg-gray-900 dark:text-white py-2.5 px-5 grid grid-cols-2 items-center">{txt.Description}:{txt.Status}
+	<div id="controls">
 		<button hx-delete={"/clicked/?id="+strconv.Itoa(txt.ID)}
 	hx-target="#handleResponse" class="bg-red-500 hover:bg-red-600 darl:hover:bg-red-600 dark:bg-red-500 text-white font-bold text-center py-2.5 px-5">X</button>
 		<button hx-get={"/clicked/edit/?id="+strconv.Itoa(txt.ID)}
 		hx-target="closest li"
 		class="bg-green-500 dark:bg-green-500 hover:bg-green-600 dark:hover:bg-green-600 text-center py-2.5 px-5">edit</button>
+		</div>
 	</li>
 	}
 }
 
 templ Edit(todo models.Todo) {
-<div>
 <form hx-put={"/clicked/?id="+strconv.Itoa(todo.ID)}
 	hx-target="#handleResponse">
 	<input type="text" name="todoDis" id="todoChange" value={todo.Description} class="text-black"/>:<input type="text" name="todoStatus" id="todoChangeStatus" value={todo.Status} class="text-black" />
+	<div id="okCancel">
 	<button type="submit" class="dark:bg-green-500 dark:hover:bg-green-600 px-5 py-2.5 text-center">OK</button>
 	<button hx-get={"/clicked/"} 
 	hx-target="#handleResponse"
 	class="dark:bg-red-500 dark:hover:bg-red-600 px-5 py-2.5 text-cetner">Cancel</button>
+	</div>
 	</form>
-</div>
 }

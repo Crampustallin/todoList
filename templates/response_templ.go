@@ -27,14 +27,14 @@ func Response(text map[int]models.Todo) templ.Component {
 		}
 		ctx = templ.ClearChildren(ctx)
 		for _, txt := range text {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<li class=\"dark:bg-gray-900 dark:text-white py-2.5 px-5\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<li class=\"dark:bg-gray-900 dark:text-white py-2.5 px-5 grid grid-cols-2 items-center\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var2 string
 			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(txt.Description)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/response.templ`, Line: 7, Col: 74}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/response.templ`, Line: 7, Col: 104}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 			if templ_7745c5c3_Err != nil {
@@ -47,13 +47,13 @@ func Response(text map[int]models.Todo) templ.Component {
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(txt.Status)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/response.templ`, Line: 7, Col: 87}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/response.templ`, Line: 7, Col: 117}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" <button hx-delete=\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"controls\"><button hx-delete=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -69,7 +69,7 @@ func Response(text map[int]models.Todo) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-target=\"closest li\" class=\"bg-green-500 dark:bg-green-500 hover:bg-green-600 dark:hover:bg-green-600 text-center py-2.5 px-5\">edit</button></li>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-target=\"closest li\" class=\"bg-green-500 dark:bg-green-500 hover:bg-green-600 dark:hover:bg-green-600 text-center py-2.5 px-5\">edit</button></div></li>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -94,7 +94,7 @@ func Edit(todo models.Todo) templ.Component {
 			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div><form hx-put=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form hx-put=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -118,7 +118,7 @@ func Edit(todo models.Todo) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"text-black\"> <button type=\"submit\" class=\"dark:bg-green-500 dark:hover:bg-green-600 px-5 py-2.5 text-center\">OK</button> <button hx-get=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"text-black\"><div id=\"okCancel\"><button type=\"submit\" class=\"dark:bg-green-500 dark:hover:bg-green-600 px-5 py-2.5 text-center\">OK</button> <button hx-get=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -126,7 +126,7 @@ func Edit(todo models.Todo) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-target=\"#handleResponse\" class=\"dark:bg-red-500 dark:hover:bg-red-600 px-5 py-2.5 text-cetner\">Cancel</button></form></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-target=\"#handleResponse\" class=\"dark:bg-red-500 dark:hover:bg-red-600 px-5 py-2.5 text-cetner\">Cancel</button></div></form>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
