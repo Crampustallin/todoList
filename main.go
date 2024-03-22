@@ -70,7 +70,7 @@ func main() {
 		return
 	})
 
-	http.HandleFunc("/clicked/edit/", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/clicked/edit", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodGet {
 			editHandler(w,r)
 			return
